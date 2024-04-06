@@ -1,0 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Reddit+Mono:wght@200..900&display=swap");
+$blueLightText: lighten(rgb(30, 34, 51), 80%);
+$bgBlue: rgb(30, 34, 51);
+$bgBlueDark: darken(rgb(30, 34, 51), 5%);
+$bgBlueLight: lighten(rgb(30, 34, 51), 15%);
+$bgBlueDarkShadow: darken(rgb(30, 34, 51), 10%);
+$roundedMd: 10px;
+
+html {
+  color-scheme: dark;
+  font-size: 10px;
+}
