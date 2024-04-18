@@ -5,6 +5,8 @@
   display: flex;
   gap: 2rem;
   max-width: fit-content;
+  padding: 0 5rem 5rem;
+
   &Item {
     font-size: 2.5rem;
     background-color: $bgBlueDark;
@@ -18,8 +20,30 @@
     transition: 0.1s;
     text-transform: capitalize;
     font-family: "Reddit Mono", monospace;
+
     &:hover {
       transform: translateY(-2px);
+    }
+
+    &Button {
+      font-size: 2.5rem;
+      background-color: $bgBlueDark;
+      color: $blueLightText;
+      padding: 2.9rem;
+      line-height: 0.75rem;
+      border-radius: $roundedMd;
+      flex-grow: 1;
+      border: none;
+      border-bottom: inset 5px $bgBlueLight;
+      box-shadow: 12px 15px 15px -5px $bgBlueDarkShadow;
+      transition: 0.1s;
+      text-transform: capitalize;
+      font-family: "Reddit Mono", monospace;
+      cursor: pointer;
+
+      &:hover {
+        transform: translateY(-2px);
+      }
     }
   }
 }
