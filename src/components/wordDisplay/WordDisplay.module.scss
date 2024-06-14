@@ -20,7 +20,8 @@
     transition: 0.1s;
     text-transform: capitalize;
     font-family: "Reddit Mono", monospace;
-
+    cursor: default;
+    user-select: none;
     &:hover {
       transform: translateY(-2px);
     }

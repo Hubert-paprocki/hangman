@@ -1,0 +1,11 @@
+@import "../../styles/config.module.scss";
+
+.letterPickerList {
+  border: 5px solid $bgBlueDark;
+  box-shadow: 12px 15px 15px -5px $bgBlueDarkShadow;
+  border-radius: $roundedLg;
+  padding: 4rem 8rem;
+  list-style-type: none;
+  display: flex;
+  gap: 2rem;
+}

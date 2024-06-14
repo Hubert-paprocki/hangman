@@ -2,24 +2,30 @@ import React from "react";
 import LetterCell from "./LetterCell";
 import classes from "./WordDisplay.module.scss";
 
+interface Letter {
+  char: string;
+  isVisible: boolean;
+}
+
 interface WordDisplayProps {
-  readonly wordArr: string[];
-  readonly letterVisibility: boolean[];
+  readonly wordData: Letter[];
 }
 
 function WordDisplay(props: WordDisplayProps) {
-  const { wordArr, letterVisibility } = props;
+  const { wordData } = props;
 
   return (
-    <ul className={classes.list}>
-      {wordArr.map((letter, index) => (
-        <LetterCell
-          key={index}
-          letter={letter}
-          visible={letterVisibility[index]}
-        />
-      ))}
-    </ul>
+    <div>
+      <ul className={classes.list}>
+        {wordData.map((letter, index) => (
+          <LetterCell
+            key={index}
+            letter={letter.char}
+            visible={letter.isVisible}
+          />
+        ))}
+      </ul>
+    </div>
   );
 }
 

@@ -10,7 +10,13 @@ interface LetterCellProps {
 function LetterCell(props: LetterCellProps) {
   return props.button ? (
     <li>
-      <button className={classes.listItemButton}>{props.letter}</button>
+      <button
+        onClick={() => console.log(props.letter)}
+        value={props.letter}
+        className={classes.listItemButton}
+      >
+        {props.letter}
+      </button>
     </li>
   ) : (
     <li className={classes.listItem}>
