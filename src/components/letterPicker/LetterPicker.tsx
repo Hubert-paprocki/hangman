@@ -4,14 +4,21 @@ import LetterCell from "../wordDisplay/LetterCell";
 
 interface LetterPickerProps {
   letterArr: string[];
+  changeVisibility: (index: number) => void;
 }
 
 function LetterPicker(props: LetterPickerProps) {
-  console.log(props.letterArr);
   return (
     <ul className={classes.letterPickerList}>
       {props.letterArr.map((letter, index) => (
-        <LetterCell key={index} letter={letter} visible button />
+        <LetterCell
+          key={index}
+          letter={letter}
+          visible
+          button
+          changeVisibility={props.changeVisibility}
+          index={index} // Added index prop
+        />
       ))}
     </ul>
   );

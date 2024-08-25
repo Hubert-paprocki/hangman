@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import axios from "axios";
+import { useState } from "react";
+
 import classes from "./App.module.scss";
 import WordDisplay from "./components/wordDisplay/WordDisplay";
 import LetterPicker from "./components/letterPicker/LetterPicker";
@@ -13,47 +13,55 @@ function RandomWordDisplay() {
   const [wordData, setWordData] = useState<Letter[]>([]);
   const [isStarted, setIsStarted] = useState<boolean>(false);
 
-  const fetchRandomWord = async () => {
+  const changeVisibility = (index: number) => {
+    setWordData((prevWordData) =>
+      prevWordData.map((letter, i) =>
+        i === index ? { ...letter, isVisible: !letter.isVisible } : letter
+      )
+    );
+  };
+
+  const generateWord = async () => {
     try {
-      let word = "";
-      let wordLength = 0;
+      const response = await fetch("http://localhost:5000/generate-word", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
-      do {
-        const response = await axios.get(
-          "https://random-word-api.herokuapp.com/word"
-        );
-        word = response.data[0];
-        wordLength = word.length;
-      } while (wordLength < 4);
+      if (!response.ok) {
+        throw new Error("Failed to generate word");
+      }
 
-      const letters = word.split(/(?!$)/u);
-      const wordData = letters.map((char) => ({
+      const data = await response.json();
+      const word = data.message;
+
+      const letters = word.split(/(?!$)/);
+      const wordData = letters.map((char: any) => ({
         char,
         isVisible: Math.random() < 0.6,
       }));
+
       setWordData(wordData);
-    } catch (error) {
-      console.error("Error fetching random word:", error);
+      setIsStarted(true);
+    } catch (err) {
+      console.error(err);
     }
   };
 
   return (
     <div className={classes.container}>
       <h1>HangMan Game</h1>
-      {!isStarted && (
-        <button
-          onClick={async () => {
-            await fetchRandomWord();
-            setIsStarted(true);
-          }}
-        >
-          Start Game
-        </button>
-      )}
+      {!isStarted && <button onClick={generateWord}>Start Game</button>}
       {isStarted && (
         <>
-          <WordDisplay wordData={wordData} />
+          <WordDisplay
+            wordData={wordData}
+            changeVisibility={changeVisibility}
+          />
           <LetterPicker
+            changeVisibility={changeVisibility}
             letterArr={wordData
               .filter((letter) => !letter.isVisible)
               .map((letter) => letter.char)}
