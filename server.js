@@ -8,7 +8,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const { PORT = 5000, API_KEY } = process.env;
+const { SERVER_PORT, API_KEY } = process.env;
 
 const GroqApi = new Groq({
   apiKey: API_KEY,
@@ -38,4 +38,6 @@ const generateWordHandler = async (req, res) => {
 
 app.post("/generate-word", generateWordHandler);
 
-app.listen(PORT, () => console.log(`Server running on PORT ${PORT}`));
+app.listen(SERVER_PORT, () =>
+  console.log(`Server running on PORT ${SERVER_PORT}`)
+);
