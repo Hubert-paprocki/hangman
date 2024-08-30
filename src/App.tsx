@@ -3,20 +3,22 @@ import { useState } from "react";
 import classes from "./App.module.scss";
 import WordDisplay from "./components/wordDisplay/WordDisplay";
 import LetterPicker from "./components/letterPicker/LetterPicker";
+import { isVisible } from "@testing-library/user-event/dist/utils";
 
-interface Letter {
-  char: string;
+export interface Letter {
+  letter: string;
   isVisible: boolean;
+  id: string;
 }
 
 function RandomWordDisplay() {
   const [wordData, setWordData] = useState<Letter[]>([]);
   const [isStarted, setIsStarted] = useState<boolean>(false);
 
-  const changeVisibility = (index: number) => {
+  const changeVisibility = (id: string) => {
     setWordData((prevWordData) =>
-      prevWordData.map((letter, i) =>
-        i === index ? { ...letter, isVisible: !letter.isVisible } : letter
+      prevWordData.map((letter) =>
+        letter.id === id ? { ...letter, isVisible: true } : letter
       )
     );
   };
@@ -37,19 +39,13 @@ function RandomWordDisplay() {
       const data = await response.json();
       const word = data.message;
 
-      const letters = word.split(/(?!$)/);
-      const wordData = letters.map((char: any) => ({
-        char,
-        isVisible: Math.random() < 0.6,
-      }));
-
-      setWordData(wordData);
+      setWordData(word);
       setIsStarted(true);
     } catch (err) {
       console.error(err);
     }
   };
-
+  console.log(wordData, `test`);
   return (
     <div className={classes.container}>
       <h1>HangMan Game</h1>
@@ -62,9 +58,7 @@ function RandomWordDisplay() {
           />
           <LetterPicker
             changeVisibility={changeVisibility}
-            letterArr={wordData
-              .filter((letter) => !letter.isVisible)
-              .map((letter) => letter.char)}
+            letterArr={wordData.filter((letter) => !letter.isVisible)}
           />
         </>
       )}

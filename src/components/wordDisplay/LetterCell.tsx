@@ -3,10 +3,10 @@ import classes from "./WordDisplay.module.scss";
 
 interface LetterCellProps {
   readonly letter: string;
-  readonly visible?: boolean;
+  readonly isVisible?: boolean;
   readonly button?: boolean;
-  changeVisibility?: (index: number) => void;
-  index: number;
+  changeVisibility?: (id: string) => void;
+  id: string;
 }
 
 function LetterCell(props: LetterCellProps) {
@@ -14,7 +14,7 @@ function LetterCell(props: LetterCellProps) {
     <li>
       <button
         onClick={() => {
-          props.changeVisibility && props.changeVisibility(props.index);
+          props.changeVisibility && props.changeVisibility(props.id);
         }}
         value={props.letter}
         className={classes.listItemButton}
@@ -24,7 +24,7 @@ function LetterCell(props: LetterCellProps) {
     </li>
   ) : (
     <li className={classes.listItem}>
-      {props.visible ? props.letter : <>‎ ‎</>}
+      {props.isVisible ? props.letter : <>‎ ‎</>}
     </li>
   );
 }

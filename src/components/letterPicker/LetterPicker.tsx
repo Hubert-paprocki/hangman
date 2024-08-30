@@ -1,23 +1,24 @@
 import React from "react";
 import classes from "./LetterPicker.module.scss";
 import LetterCell from "../wordDisplay/LetterCell";
+import { Letter } from "../../App";
 
 interface LetterPickerProps {
-  letterArr: string[];
-  changeVisibility: (index: number) => void;
+  letterArr: Letter[];
+  changeVisibility: (id: string) => void;
 }
 
 function LetterPicker(props: LetterPickerProps) {
   return (
     <ul className={classes.letterPickerList}>
-      {props.letterArr.map((letter, index) => (
+      {props.letterArr.map((word) => (
         <LetterCell
-          key={index}
-          letter={letter}
-          visible
+          key={word.id}
+          letter={word.letter}
+          isVisible
           button
           changeVisibility={props.changeVisibility}
-          index={index} // Added index prop
+          id={word.id}
         />
       ))}
     </ul>
