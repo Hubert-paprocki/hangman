@@ -14,7 +14,6 @@
     padding: 2.9rem;
     line-height: 0.75rem;
     border-radius: $roundedMd;
-    flex-grow: 1;
     border-bottom: inset 5px $bgBlueLight;
     box-shadow: 12px 15px 15px -5px $bgBlueDarkShadow;
     transition: 0.1s;
@@ -22,6 +21,7 @@
     font-family: "Reddit Mono", monospace;
     cursor: default;
     user-select: none;
+
     &:hover {
       transform: translateY(-2px);
     }

@@ -6,7 +6,7 @@ interface LetterCellProps {
   readonly visible?: boolean;
   readonly button?: boolean;
   changeVisibility?: (index: number) => void;
-  index: number; // Added index to props
+  index: number;
 }
 
 function LetterCell(props: LetterCellProps) {
@@ -24,7 +24,7 @@ function LetterCell(props: LetterCellProps) {
     </li>
   ) : (
     <li className={classes.listItem}>
-      {props.visible ? props.letter : <>&#x200b;&#x200b;</>}
+      {props.visible ? props.letter : <>‎ ‎</>}
     </li>
   );
 }
